@@ -1,6 +1,9 @@
 package service;
 
+import bean.User;
 import dao.UserDao;
+
+import java.sql.SQLException;
 
 /**
  *
@@ -27,6 +30,21 @@ public class UserService {
 
         }
         return register;
+
+    }
+
+
+    /**
+     * 登录
+     * @param name
+     * @param password
+     */
+    public User login(String name, String password) throws SQLException {
+
+        UserDao userDao=new UserDao();
+        User user = userDao.login(name, password);
+
+        return user;
 
     }
 }

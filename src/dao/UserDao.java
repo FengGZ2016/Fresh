@@ -72,4 +72,21 @@ public class UserDao {
             return false;
         }
     }
+
+
+    /**
+     *
+     * @param name
+     * @param password
+     */
+    public User login(String name, String password) throws SQLException {
+
+        ComboPooledDataSource comboPooledDataSource=new ComboPooledDataSource();
+        QueryRunner queryRunner=new QueryRunner(comboPooledDataSource);
+        String sqlStr="select * from user where name=? and password=?";
+        User user = queryRunner.query(sqlStr, new BeanHandler<User>(User.class),name,password);
+
+        return user;
+
+    }
 }
