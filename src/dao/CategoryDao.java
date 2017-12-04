@@ -4,6 +4,7 @@ import bean.Category;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -47,5 +48,35 @@ public class CategoryDao {
         List<Category> categoryList = queryRunner.query(sqlStr, new BeanListHandler<Category>(Category.class));
 
         return categoryList;
+    }
+
+
+    /**
+     * 分页查询数据
+     * @param startPosition 起始位置
+     * @param currentCount 当前页的数量
+     * @return
+     * @throws SQLException
+     */
+    public  List<Category> queryPageCategoryList(int startPosition,int currentCount) throws SQLException {
+        ComboPooledDataSource comboPooledDataSource=new ComboPooledDataSource();
+        QueryRunner queryRunner=new QueryRunner(comboPooledDataSource);
+        String sqlStr="select * from category limit ?,?";
+        List<Category> categoryList = queryRunner.query(sqlStr, new BeanListHandler<Category>(Category.class),startPosition,currentCount);
+
+        return categoryList;
+    }
+
+
+    /**
+     * 生鲜数据的总数
+     */
+    public int queryCount() throws SQLException {
+        ComboPooledDataSource comboPooledDataSource=new ComboPooledDataSource();
+        QueryRunner queryRunner=new QueryRunner(comboPooledDataSource);
+        String sqlStr="select count(*) from category";
+        Long query = queryRunner.query(sqlStr, new ScalarHandler<>());
+
+        return query.intValue();
     }
 }

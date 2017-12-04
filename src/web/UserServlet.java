@@ -119,7 +119,7 @@ public class UserServlet extends BaseServlet{
             }
 
             //登录成功/category?method=getCategoryList
-            resp.sendRedirect(req.getContextPath()+"/category?method=getCategoryList");
+            resp.sendRedirect(req.getContextPath()+"/category?method=getCategoryList&currentPage=1&currentCount=10");
 
         }else {
             //登录失败

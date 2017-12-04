@@ -1,6 +1,7 @@
 package web;
 
 import bean.Category;
+import bean.Page;
 import org.apache.commons.beanutils.BeanUtils;
 import service.CategoryService;
 
@@ -11,7 +12,6 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -78,12 +78,25 @@ public class CategoryServlet extends BaseServlet{
 
 
         try {
+            //获取当前页数
+            int currentPage = Integer.parseInt(req.getParameter("currentPage"));
+            //获取当前页的生鲜总数
+            int currentCount = Integer.parseInt(req.getParameter("currentCount"));
+
+            // 给分页数据设置默认值
+            if (currentCount==0){
+                currentCount=10;
+            }
+            if (currentPage==0){
+                currentPage=1;
+            }
+
             //直接调用service层操作
             CategoryService categoryService=new CategoryService();
-            List<Category> categoryList = categoryService.findCategory();
-            if (categoryList!=null&&categoryList.size()>0){
+           Page page = categoryService.findPageCategory(currentPage,currentCount);
+            if (page!=null){
 
-                req.setAttribute("list",categoryList);
+                req.setAttribute("page",page);
                 req.getRequestDispatcher("/category-list.jsp").forward(req,resp);
             }else {
                 req.getRequestDispatcher("/category-list.jsp").forward(req,resp);
@@ -94,4 +107,7 @@ public class CategoryServlet extends BaseServlet{
             e.printStackTrace();
         }
     }
+
+
+
 }

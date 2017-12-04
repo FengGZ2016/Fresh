@@ -57,7 +57,7 @@
 								</tr>
 							</thead>
 							<tbody>
-							<c:forEach items="${list}" var="category">
+							<c:forEach items="${page.list}" var="category">
 								<tr>
 									<th>${category.c_id}</th>
 									<td>${category.c_name}</td>

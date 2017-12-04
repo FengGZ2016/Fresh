@@ -1,6 +1,7 @@
 package service;
 
 import bean.Category;
+import bean.Page;
 import dao.CategoryDao;
 
 import java.sql.SQLException;
@@ -35,5 +36,38 @@ public class CategoryService {
         List<Category> categoryList = categoryDao.queryCategoryList();
 
         return categoryList;
+    }
+
+
+    /**
+     *查询生鲜列表
+     * @param currentPage
+     * @param currentCount
+     */
+    public  Page findPageCategory(int currentPage, int currentCount) throws SQLException {
+
+        CategoryDao categoryDao=new CategoryDao();
+        //查询出生鲜数据的总数
+        int totalCount = categoryDao.queryCount();
+        //根据总数和当前页面显示数计算出总页数
+        int totalPage= (int) Math.ceil(1.0*totalCount/currentCount);
+
+        //封装page到bean中
+        Page page=new Page();
+        page.setTotalCount(totalCount);
+        page.setTotalPage(totalPage);
+        page.setCurrentCount(currentCount);
+        page.setCurrentPage(currentPage);
+
+        //计算分页查询的起始位置
+        int startPosition=(currentPage-1)*currentCount;
+
+        //分页查询数据
+        List<Category> pageCategoryList = categoryDao.queryPageCategoryList(startPosition, currentCount);
+        // 将集合数据封装到page类中
+        page.setList(pageCategoryList);
+
+        return page;
+
     }
 }
