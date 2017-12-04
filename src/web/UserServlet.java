@@ -25,25 +25,25 @@ public class UserServlet extends HttpServlet{
     private final String METHOD_LOGIN="login";
     private final String METHOD_REGISTER="register";
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        this.doGet(req,resp);
-    }
+//    @Override
+//    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        this.doGet(req,resp);
+//    }
 
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String method=req.getParameter("method");
-        if (METHOD_LOGIN.equals(method)){
-            //登录
-            login(req,resp);
-
-        }else if (METHOD_REGISTER.equals(method)){
-            //注册
-            register(req,resp);
-
-        }
-    }
+//    @Override
+//    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        String method=req.getParameter("method");
+//        if (METHOD_LOGIN.equals(method)){
+//            //登录
+//            login(req,resp);
+//
+//        }else if (METHOD_REGISTER.equals(method)){
+//            //注册
+//            register(req,resp);
+//
+//        }
+//    }
 
 
     /**
