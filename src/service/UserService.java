@@ -18,15 +18,15 @@ public class UserService {
      * @param password
      * @param email
      */
-    public boolean register(String name, String password, String email) {
+    public boolean register(User user) {
         boolean register=false;
 
         //1,先检查用户是否已存在
         UserDao userDao=new UserDao();
-        boolean checkUser=userDao.checkUser(name);
+        boolean checkUser=userDao.checkUser(user.getName());
         if (checkUser){
             //注册
-            register=userDao.register(name,password,email);
+            register=userDao.register(user);
 
         }
         return register;

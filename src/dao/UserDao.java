@@ -51,13 +51,13 @@ public class UserDao {
      * @param password
      * @param email
      */
-    public boolean register(String name, String password, String email) {
+    public boolean register(User user) {
 
         try {
             ComboPooledDataSource comboPooledDataSource=new ComboPooledDataSource();
             QueryRunner queryRunner=new QueryRunner(comboPooledDataSource);
             String sqlStr="insert into user value(null,?,?,?)";
-            int row = queryRunner.update(sqlStr, name, password, email);
+            int row = queryRunner.update(sqlStr, user.getName(), user.getPassword(), user.getEmail());
             if (row>0){
                 //注册成功
                 return true;
