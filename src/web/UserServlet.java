@@ -6,7 +6,6 @@ import service.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -19,7 +18,7 @@ import java.util.Map;
  * @author Administrator
  * @date 2017/12/4
  */
-public class UserServlet extends HttpServlet{
+public class UserServlet extends BaseServlet{
 
     private final String REMEMBER="yes";
     private final String METHOD_LOGIN="login";
@@ -53,7 +52,7 @@ public class UserServlet extends HttpServlet{
      * @throws ServletException
      * @throws IOException
      */
-    protected void register(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void register(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //接收前台的请求参数
         String name=req.getParameter("name");
         String password=req.getParameter("password");
@@ -89,7 +88,7 @@ public class UserServlet extends HttpServlet{
      * @throws ServletException
      * @throws IOException
      */
-    protected void login(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void login(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //获取参数
         String name=req.getParameter("name");
         String password=req.getParameter("password");

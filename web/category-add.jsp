@@ -29,7 +29,7 @@
             <!-- 左侧内容 -->
             <div class="col-md-3">
                 <div class="list-group">
-                    <a href="${pageContext.request.contextPath}/category" class="list-group-item text-center ">生鲜列表</a>
+                    <a href="${pageContext.request.contextPath}/category-list.jsp" class="list-group-item text-center ">生鲜列表</a>
                     <a href="${pageContext.request.contextPath}/layout-form.html"
                        class="list-group-item text-center active">新增生鲜</a>
                 </div>
