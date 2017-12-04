@@ -34,7 +34,7 @@
         <div class="web_login" id="web_login">
             <div class="login-box">
                 <div class="login_form">
-                    <form action="login"
+                    <form action="user"
                           accept-charset="utf-8" id="login_form" class="loginForm"
                           method="post">
                         <input type="hidden" name="method" value="login"/>

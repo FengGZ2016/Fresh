@@ -3,8 +3,10 @@ package dao;
 import bean.Category;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  *
@@ -32,5 +34,18 @@ public class CategoryDao {
             return false;
         }
 
+    }
+
+
+    /**
+     * 查询生鲜列表
+     */
+    public  List<Category> queryCategoryList() throws SQLException {
+        ComboPooledDataSource comboPooledDataSource=new ComboPooledDataSource();
+        QueryRunner queryRunner=new QueryRunner(comboPooledDataSource);
+        String sqlStr="select * from category";
+        List<Category> categoryList = queryRunner.query(sqlStr, new BeanListHandler<Category>(Category.class));
+
+        return categoryList;
     }
 }

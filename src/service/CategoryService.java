@@ -4,6 +4,7 @@ import bean.Category;
 import dao.CategoryDao;
 
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  *
@@ -23,5 +24,16 @@ public class CategoryService {
         boolean addCategory=categoryDao.addCategory(category);
         return addCategory;
 
+    }
+
+    /**
+     *查询生鲜列表
+     */
+    public  List<Category> findCategory() throws SQLException {
+        //调用dao层操作数据库
+        CategoryDao categoryDao=new CategoryDao();
+        List<Category> categoryList = categoryDao.queryCategoryList();
+
+        return categoryList;
     }
 }

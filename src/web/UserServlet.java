@@ -118,8 +118,8 @@ public class UserServlet extends BaseServlet{
 
             }
 
-            //登录成功
-            resp.sendRedirect(req.getContextPath()+"/category-list.jsp");
+            //登录成功/category?method=getCategoryList
+            resp.sendRedirect(req.getContextPath()+"/category?method=getCategoryList");
 
         }else {
             //登录失败

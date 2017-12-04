@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -63,5 +64,34 @@ public class CategoryServlet extends BaseServlet{
         }
 
 
+    }
+
+
+    /**
+     * 查询生鲜列表
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
+    public void getCategoryList(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+
+        try {
+            //直接调用service层操作
+            CategoryService categoryService=new CategoryService();
+            List<Category> categoryList = categoryService.findCategory();
+            if (categoryList!=null&&categoryList.size()>0){
+
+                req.setAttribute("list",categoryList);
+                req.getRequestDispatcher("/category-list.jsp").forward(req,resp);
+            }else {
+                req.getRequestDispatcher("/category-list.jsp").forward(req,resp);
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
