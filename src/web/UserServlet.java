@@ -118,6 +118,9 @@ public class UserServlet extends BaseServlet{
 
             }
 
+            //将用户的登录信息保存进session中
+            req.getSession().setAttribute("user",user);
+
             //登录成功/category?method=getCategoryList
             resp.sendRedirect(req.getContextPath()+"/category?method=getCategoryList&currentPage=1&currentCount=10");
 
