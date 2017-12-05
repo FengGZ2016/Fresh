@@ -100,4 +100,26 @@ public class CategoryDao {
             return false;
         }
     }
+
+
+    /**
+     * 删除生鲜
+     * @param category
+     * @return
+     */
+    public boolean deleteCategory(Category category) throws SQLException {
+        ComboPooledDataSource comboPooledDataSource=new ComboPooledDataSource();
+        QueryRunner queryRunner=new QueryRunner(comboPooledDataSource);
+        String sqlStr="delete from category where c_id=?";
+        int row = queryRunner.update(sqlStr, category.getC_id());
+
+        if (row>0){
+            //删除成功
+            return true;
+        }else {
+            //删除失败
+            return false;
+        }
+
+    }
 }

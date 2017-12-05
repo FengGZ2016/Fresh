@@ -83,4 +83,17 @@ public class CategoryService {
         boolean updateCategory=categoryDao.updateCategory(category);
         return updateCategory;
     }
+
+
+    /**
+     * 删除生鲜
+     * @param category
+     * @return
+     */
+    public boolean deleteCategory(Category category) throws SQLException {
+        CategoryDao categoryDao=new CategoryDao();
+        boolean deleteCategory=categoryDao.deleteCategory(category);
+        return deleteCategory;
+
+    }
 }

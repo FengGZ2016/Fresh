@@ -148,4 +148,46 @@ public class CategoryServlet extends BaseServlet{
         }
 
     }
+
+
+    /**
+     * 删除生鲜
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
+    public void deleteCategory(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        try {
+
+            //获取前台的请求参数id
+            Map<String, String[]> parameterMap = req.getParameterMap();
+            Category category=new Category();
+            BeanUtils.populate(category,parameterMap);
+            //调用业务逻辑层的删除方法
+            CategoryService categoryService=new CategoryService();
+            boolean deleteCategory=categoryService.deleteCategory(category);
+
+            if (deleteCategory){
+                //删除成功
+                // 删除成功后重定向到生鲜列表界面
+                resp.sendRedirect(req.getContextPath()+"/category?method=getCategoryList&currentPage=1&currentCount=10");
+            }else {
+                //删除失败
+                // 失败了直接提示
+                resp.setContentType("text/html;charset=utf-8");
+                resp.getWriter().write("删除失败");
+            }
+
+
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
 }
