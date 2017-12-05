@@ -79,4 +79,25 @@ public class CategoryDao {
 
         return query.intValue();
     }
+
+    /**
+     * 修改生鲜信息
+     * @param category
+     * @return
+     */
+    public boolean updateCategory(Category category) throws SQLException {
+        ComboPooledDataSource comboPooledDataSource=new ComboPooledDataSource();
+        QueryRunner queryRunner=new QueryRunner(comboPooledDataSource);
+        String sqlStr="update category set c_name=?,place=?,type=? where c_id=?";
+        int row = queryRunner.update(sqlStr, category.getC_name(), category.getPlace(), category.getType(), category.getC_id());
+
+        if (row>0){
+            //修改成功
+            return true;
+
+        }else {
+            //修改失败
+            return false;
+        }
+    }
 }

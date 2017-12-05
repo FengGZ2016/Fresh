@@ -109,5 +109,43 @@ public class CategoryServlet extends BaseServlet{
     }
 
 
+    /**
+     * 修改生鲜
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
+    public void updateCategory(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        try {
+            //获取前台所有的请求参数
+            Map<String, String[]> parameterMap = req.getParameterMap();
+            Category category=new Category();
+            BeanUtils.populate(category,parameterMap);
+
+            //调用业务逻辑层的查询方法
+            CategoryService categoryService=new CategoryService();
+            boolean updateCategory=categoryService.updateCategory(category);
+
+            if (updateCategory){
+                //修改成功
+                // 修改成功后重定向到生鲜列表界面
+                resp.sendRedirect(req.getContextPath()+"/category?method=getCategoryList&currentPage=1&currentCount=10");
+            }else {
+                //修改失败
+                // 失败了直接提示
+                resp.setContentType("text/html;charset=utf-8");
+                resp.getWriter().write("修改失败");
+            }
+
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
 }

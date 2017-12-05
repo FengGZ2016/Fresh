@@ -54,4 +54,7 @@ public class Category {
     public void setType(int type) {
         this.type = type;
     }
+
+
+
 }

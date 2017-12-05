@@ -70,4 +70,17 @@ public class CategoryService {
         return page;
 
     }
+
+
+    /**
+     * 更新生鲜
+     * @param category
+     * @return
+     */
+    public boolean updateCategory(Category category) throws SQLException {
+
+        CategoryDao categoryDao=new CategoryDao();
+        boolean updateCategory=categoryDao.updateCategory(category);
+        return updateCategory;
+    }
 }
